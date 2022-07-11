@@ -8,25 +8,29 @@ const Navbar = () => {
     <div className="flex items-center justify-between p-4 -[100] w-full absolute">
       <Link to="/">
         <h1 className="text-red-600 text-4xl font-bold cursor-pointer ">
-          Netflex
+          Blog
         </h1>
       </Link>
-      <div>
+      <div className="flex">
         {user ? (
           <>
             <Link to="/account">
-              <button className="bg-red-600 px-6 py-2 rounded cursor-pointer text-white">
+              <h1 className="bg-red-600 px-2 text-xl rounded cursor-pointer text-white">
                 Account
-              </button>
+              </h1>
             </Link>
-
+            <Link to="/createpost">
+              <h1 className="bg-red-600 px-2 text-xl rounded cursor-pointer text-white">
+                Create post
+              </h1>
+            </Link>
             <Link to="/">
-              <button
+              <h1
                 onClick={() => logOut()}
-                className="bg-red-600 px-6 py-2 rounded cursor-pointer text-white"
+                className="bg-red-600 px-2 text-xl rounded cursor-pointer text-white"
               >
                 Log out
-              </button>
+              </h1>
             </Link>
           </>
         ) : (

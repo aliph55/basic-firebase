@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
+import { UserAuth, pro } from "../context/AuthContext";
+import { signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase.config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { user, logIn } = UserAuth();
+  const { logIn } = UserAuth();
 
   const navigate = useNavigate();
+
+  const popUp = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await signInWithPopup(auth, pro);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
   const handleLogIn = async (e) => {
     setError("");
     e.preventDefault();
@@ -45,6 +59,12 @@ const Login = () => {
               />
               <button className="bg-red-600 py-3 my-6 rounded font-bold">
                 Sign In
+              </button>
+              <button
+                onClick={popUp}
+                className="bg-red-600 py-3 my-6 rounded font-bold"
+              >
+                Sign In wight Google
               </button>
               <div className="flex justify-between items-center text-sm text-gray-600">
                 <p>
